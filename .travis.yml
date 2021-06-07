@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - openjdk8
+
+# 어느 브랜치가 푸시될 때 수행할 것인지!
+branches:
+  only:
+    - master
+# 같은 의존성은 다음 배포때부터 다시 받지 않도록 캐싱.
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+script:
+  - "./gradlew clean build"
