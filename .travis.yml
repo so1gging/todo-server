@@ -2,13 +2,12 @@ language: java
 jdk:
   - openjdk8
 
-branches: # 1.
+branches:
   only:
     - master
 
-# Travis CI 서버의 Home
-cache: # 2.
+cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
-script: "./gradlew clean build" # 3.
+script: "./gradlew clean build"
