@@ -13,3 +13,4 @@ cache:
     - '$HOME/.gradle'
 script:
   - "./gradlew clean build"
+
