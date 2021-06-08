@@ -2,14 +2,18 @@ language: java
 jdk:
   - openjdk8
 
+# Travis CI를 어느 브랜치가 푸시될 때 수행할 지 지정
 branches:
   only:
     - master
 
+# gradle을 통해 의존성을 받고난 후, 이를 해당 디렉토리에 캐시하여 같은 의존성은 다음 캐시때 받지 않도록 함.
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
+
+# 해당 브랜치가 push되었을 때 실행하는 script
 script: "./gradlew clean build"
 
 before_deploy:
