@@ -18,7 +18,7 @@ script: "./gradlew clean build"
 
 # deploy 전에 (Code Deploy는 jar파일을 인식하지 못하므로 기타설정파일을 모아 압축해야 한다.)
 before_deploy:
-  - zip -r todo-server * # 현재 위치의 모든 파일을 todo-server 라는 이름으로 압축
+  - zip -r todo-server * # 현재 위치의 모든 파일을 현재 프로젝트 이름으로 압축
   - mkdir -p deploy # deploy라는 디렉토리를 Travis CI가 실행중인 위치에서 생성
   - mv todo-server.zip deploy/todo-server.zip
 
@@ -32,3 +32,17 @@ deploy:
     acl: private
     local_dir: deploy # before_deploy에서 생성한 디렉토리 , 해당 위치의 파일들만 S3로 전송한다.
     wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+
+    bucket: my-spirngboot-deploy-jar
+    key : todo-server.zip # build파일 전달
+
+    bundle_type : zip
+    application : code-deploy # CodeDeploy에 만든 application
+
+    deplyment_group : group
+    region: ap-northeast-2
+    wait-until-deployed : true
