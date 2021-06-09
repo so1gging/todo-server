@@ -79,5 +79,10 @@ public class TodoController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("서버배포 됬어용");
+    }
+
 
 }
